@@ -20,13 +20,14 @@ class SquareGame {
    field Square square; // the square of this game
    field int direction; // the square's current direction: 
                         // 0=none, 1=up, 2=down, 3=left, 4=right
-
+   field bool collision;
    /** Constructs a new Square Game. */
    constructor SquareGame new() {
       // Creates a 30 by 30 pixels square and positions it at the top-left
       // of the screen.
       let square = Square.new(20, 20, 20);
       let direction = 0;  // initial state is no movement
+      let collision = true;
       return this;
    }
 
@@ -39,10 +40,11 @@ class SquareGame {
 
    /** Moves the square in the current direction. */
    method void moveSquare() {
-      if (direction = 1) { do square.moveUp(); }
-      if (direction = 2) { do square.moveDown(); }
-      if (direction = 3) { do square.moveLeft(); }
-      if (direction = 4) { do square.moveRight(); }
+      if (direction = 1) { let collision = square.moveUp(); }
+      if (direction = -1) { let collision = square.moveDown(); }
+      if (direction = -2) { let collision = square.moveLeft(); }
+      if (direction = 2) { let collision = square.moveRight(); }
+      if (collision) { let direction = direction * -1;}
       do Sys.wait(5);  // delays the next movement
       return;
    }
@@ -63,9 +65,9 @@ class SquareGame {
          if (key = 90)  { do square.decSize(); } // z key
          if (key = 88)  { do square.incSize(); } // x key
          if (key = 131) { let direction = 1; }   // up arrow
-         if (key = 133) { let direction = 2; } // down arrow
-         if (key = 130) { let direction = 3; }   // left arrow
-         if (key = 132) { let direction = 4; }   // right arrow
+         if (key = 133) { let direction = -1; } // down arrow
+         if (key = 130) { let direction = -2; }   // left arrow
+         if (key = 132) { let direction = 2; }   // right arrow
 
          // waits for the key to be released
          while (~(key = 0)) {

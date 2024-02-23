@@ -61,50 +61,54 @@ class Square {
    }
 
    /** Moves the square up by 2 pixels. */
-   method void moveUp() {
+   method bool moveUp() {
       if (y > size) {
          do Screen.setColor(false);
          do Screen.drawCircle(x, y, size);
          let y = y - 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y, size);
+         return false;
       }
-      return;
+      return true;
    }
 
    /** Moves the square down by 2 pixels. */
-   method void moveDown() {
+   method bool moveDown() {
       if ((y + size) < 254) {
          do Screen.setColor(false);
          do Screen.drawCircle(x, y, size);
          let y = y + 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y, size);
+         return false;
       }
-      return;
+      return true;
    }
 
    /** Moves the square left by 2 pixels. */
-   method void moveLeft() {
+   method bool moveLeft() {
       if (x > size) {
          do Screen.setColor(false);
          do Screen.drawCircle(x, y,  size);
          let x = x - 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y,  size);
+         return false;
       }
-      return;
+      return true;
    }
 
    /** Moves the square right by 2 pixels. */
-   method void moveRight() {
+   method bool moveRight() {
       if ((x + size) < 510) {
          do Screen.setColor(false);
          do Screen.drawCircle(x, y,  size);
          let x = x + 2;
          do Screen.setColor(true);
          do Screen.drawCircle(x, y,  size);
+         return false;
       }
-      return;
+      return true;
    }
 }
